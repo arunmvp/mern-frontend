@@ -1,0 +1,132 @@
+.product-card-wide {
+  position: relative;
+  gap: 24px;
+  display: flex;
+  width: 1070px;
+  height: 220px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-wide:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-img-wide {
+  width: 30%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+
+.product-img-wide img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  transition: opacity 0.3s ease;
+  border-radius: 4px;
+}
+
+.fade-in {
+  opacity: 1;
+  z-index: 2;
+}
+
+.fade-out {
+  opacity: 0;
+  z-index: 1;
+}
+
+.product-info-wide {
+  padding: 24px;
+  width: 60%;
+}
+
+.product-info-wide h3 {
+  font-size: 17px;
+  margin-bottom: 12px;
+  color: var(--titlecolor);
+  font-weight: 600;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 16px;
+  /* height: 20px; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 95%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  line-height: 1.4;
+  letter-spacing: 0.2px;
+  opacity: .6;
+
+}
+
+.rating {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  width: max-content;
+}
+
+.star {
+  font-size: 18px;
+  color: #ccc;
+}
+
+.star.filled {
+  color: #fbc02d;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+}
+
+.price {
+  color: #2196f3;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.old-price {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+.discount {
+  color: #ff4b5c;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #ff4b5c;
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  z-index: 3;
+}
+

@@ -1,0 +1,58 @@
+.heroBanner{
+    width: 1110px;
+    height: 350px;
+    background-color: var(--bgcolor);
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.banner-content h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+    color: #fff;
+}
+
+.banner-content h1 span {
+  font-size: 2.2rem;
+  font-weight: 600;
+  display: block;
+  color: #fff;
+}
+
+.banner-content p {
+  margin: 10px 0 20px;
+  font-size: 0.95rem;
+  opacity: 0.9;
+    color: #fff;
+}
+
+.shop-btn {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s ease;
+  position: relative;
+}
+.shop-btn::after{
+    content: ' ';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background-color: #fff;
+    left: 0;
+    bottom: -4px;
+    transition: 0.3s ease;
+    border-radius: 50px;
+}
+.shop-btn:hover::after{
+    width: 100%;
+}
+
+.shop-btn:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Grechen+Fuemen&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+:root{
+    --bgcolor : #40bfff;
+    --titlecolor : #223263;
+}
+
+.main-container{
+  display: flex;
+  gap: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* For Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px;             /* Width of vertical scrollbar */
+  height: 12px;            /* Height of horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;      /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(214, 212, 212);  /* Scroll thumb color */
+  border-radius: 10px;         /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(173, 172, 172);   /* Hover effect */
+}
+

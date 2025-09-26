@@ -1,0 +1,118 @@
+.sidebar {
+  width: 355px;
+  padding: 20px;
+  margin: 5px 0 0 8px;
+  border-radius: 4px;
+  height: fit-content;
+}
+.firstsection {
+  background: #f6f7f8;
+  padding: 20px 20px;
+  border-radius: 4px;
+}
+.firstsection ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+.firstsection ul li {
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 18px !important;
+  font-weight: 400;
+}
+.count {
+  position: absolute;
+  right: 10px;
+  color: rgb(177, 175, 175);
+}
+.sidebar h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.sidebar ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.sidebar ul li {
+  font-size: 0.9rem;
+  margin: 8px 0;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.sidebar ul li:hover {
+  color: #2a72de;
+}
+.brandactive {
+  color: #2db8fd;   /* highlight color */
+  font-weight: bold;
+}
+.filter-section {
+  margin-bottom: 20px;
+  background: #f6f7f8;
+  /* margin-top: 10px; */
+  padding: 20px 20px;
+  border-radius: 4px;
+}
+.filter-section input[type="range"] { 
+  width: 100%;
+  margin: 10px 0;
+}
+.filter-section h6 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  font-weight: 400;
+  word-spacing: 10px;
+}
+.filter-section h4 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.filter-section li {
+  font-size: 18px !important;
+  font-weight: 400;
+}
+.colors {
+  display: flex;
+  gap: 20px;
+}
+.color {
+  width: 33px !important;
+  height: 30px !important;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.color.red { 
+  background: red;
+  background-clip: content-box;
+}
+.color.blue {
+  background: blue;
+  background-clip: content-box;
+}
+.color.yellow {
+  background: yellow;
+  background-clip: content-box;
+}
+.color.black {
+  background: black;
+  background-clip: content-box;
+}
+.color.green {
+  background: green;
+  background-clip: content-box;
+}
+.color.gray {
+  background: gray;
+  background-clip:content-box;
+}
+.coloractive {
+  border: 2px solid #ccc;
+  padding: 3px !important;
+}
