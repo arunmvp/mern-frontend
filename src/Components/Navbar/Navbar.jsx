@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { FaUserCircle, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
-import Logo from "../../Assets/logo/logo.png";
+import Logo from "../../assets/logo/logo.png";
 import CartDrawer from "../CartDrawer/CartDrawer";
 import "./Navbar.css";
 import { useSelector } from "react-redux";
