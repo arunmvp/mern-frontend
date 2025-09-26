@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import Herosection from "./Components/Herosection/Herosection";
 import Navbar from "./Components/Navbar/Navbar";
-import ProductfilterBar from "./Components/ProductFilter/ProductfilterBar";
+import ProductfilterBar from "./Components/ProductFilter/ProductFilterBar";
 import ProductsGrid from "./Components/ProductsGrid/ProductsGrid";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import { useDispatch } from "react-redux";

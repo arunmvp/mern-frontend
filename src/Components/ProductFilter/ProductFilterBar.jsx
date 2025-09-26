@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./ProductFilterBar.css";
 import { CgMenuGridR } from "react-icons/cg";
 import { TbMenu2 } from "react-icons/tb";
