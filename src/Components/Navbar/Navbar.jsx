@@ -14,6 +14,10 @@ export default function Navbar() {
   const products = useSelector((state) => state.products.products);
   const { OpenPopup } = useContext(ProductContext);
   const { isAuthenticated, user, logout } = useContext(AuthContext);
+  const cartItems = useSelector((state) => state.cart.cartItems) || [];
+
+  // console.log(user);
+  
 
   const [cartOpen, setCartOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -165,7 +169,7 @@ export default function Navbar() {
           {/* Cart */}
           <div className="nav-cart" onClick={() => setCartOpen(true)}>
             <PiShoppingCartSimpleBold size={22} />
-            <span className="items-count">2</span>
+            <span className="items-count">{cartItems.length}</span>
           </div>
 
           {/* Hamburger */}
@@ -198,7 +202,7 @@ export default function Navbar() {
       )}
 
       {/* Cart Drawer */}
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} userId={user?._id || user?.id} />
     </>
   );
 }

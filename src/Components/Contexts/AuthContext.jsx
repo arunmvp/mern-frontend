@@ -1,17 +1,19 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
-// Create Context
+// Named export for context
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+// Functional component for provider
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const storedToken = localStorage.getItem("token");
+    // console.log(storedUser);
+    
     if (storedUser && storedToken) {
       setUser(storedUser);
       setToken(storedToken);
@@ -19,36 +21,41 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
-
   const register = (userdata, token) => {
-    setUser(userdata);
+    const normalizedUser = { ...userdata, _id: userdata.id || userdata._id };
+    setUser(normalizedUser);
     setToken(token);
-    if (token) setIsAuthenticated(true);
+    setIsAuthenticated(!!token);
 
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userdata));
-    window.location.reload()
+    localStorage.setItem("user", JSON.stringify(normalizedUser));
+
+    window.location.reload();
   };
 
   const logout = () => {
     setUser(null);
     setToken(null);
     setIsAuthenticated(false);
-    
+
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    window.location.reload()
-    console.log('token removed');
-    
+
+    // console.log("User logged out");
+    window.location.reload();
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, token, register, isAuthenticated, logout }}
+      value={{
+        user,
+        token,
+        isAuthenticated,
+        register,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
-};
-
-export default AuthProvider;
+}

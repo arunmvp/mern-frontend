@@ -18,7 +18,17 @@ export default function AuthUser({ isOpen, onClose, defaultMode }) {
     confirmPassword: "",
   });
 
-  // Update mode whenever popup opens
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     setIsLogin(defaultMode === "login");
   }, [defaultMode, isOpen]);
@@ -32,6 +42,7 @@ export default function AuthUser({ isOpen, onClose, defaultMode }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!isLogin && formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -47,12 +58,8 @@ export default function AuthUser({ isOpen, onClose, defaultMode }) {
           email: formData.email,
           password: formData.password,
         });
-        
       } else {
-        res = await axios.post(
-          "http://localhost:3000/api/auth/register",
-          formData
-        );
+        res = await axios.post("http://localhost:3000/api/auth/register", formData);
       }
 
       const userdata = res.data.user;
@@ -80,6 +87,7 @@ export default function AuthUser({ isOpen, onClose, defaultMode }) {
         <button className="close-btn" onClick={onClose}>
           &times;
         </button>
+
         <h2 style={{ paddingBottom: "20px" }}>{isLogin ? "Login" : "Register"}</h2>
 
         {successMsg ? (

@@ -7,7 +7,7 @@ import FilterContext  from './Components/Contexts/FilterContex.jsx'
 import {store} from "../Redux/store.js"
 import { Provider } from 'react-redux'
 import  ProductContext  from './Components/Contexts/PopupContext.jsx'
-import AuthProvider from './Components/Contexts/AuthContext.jsx'
+import { AuthProvider } from './Components/Contexts/AuthContext.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
