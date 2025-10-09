@@ -54,12 +54,12 @@ export default function AuthUser({ isOpen, onClose, defaultMode }) {
     try {
       let res;
       if (isLogin) {
-        res = await axios.post("http://localhost:3000/api/auth/login", {
+        res = await axios.post("https://mern-backend-ev9c.onrender.com/api/auth/login", {
           email: formData.email,
           password: formData.password,
         });
       } else {
-        res = await axios.post("http://localhost:3000/api/auth/register", formData);
+        res = await axios.post("https://mern-backend-ev9c.onrender.com/api/auth/register", formData);
       }
 
       const userdata = res.data.user;
