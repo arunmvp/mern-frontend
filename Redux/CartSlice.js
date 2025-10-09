@@ -15,7 +15,7 @@ export const fetchCart = createAsyncThunk(
   "cart/fetchCart",
   async (userId, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/cart/${userId}`);
+      const res = await axios.get(`https://mern-backend-ev9c.onrender.com/api/cart/${userId}`);
       const data = res.data.cartItems || [];
       localStorage.setItem("cartItems", JSON.stringify(data)); // save to localStorage
       return data;
@@ -30,7 +30,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async (payload, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/cart/add`, payload);
+      const res = await axios.post(`https://mern-backend-ev9c.onrender.com/api/cart/add`, payload);
       const data = res.data.cartItems || [];
       localStorage.setItem("cartItems", JSON.stringify(data));
       return data;
@@ -45,7 +45,7 @@ export const removeFromCart = createAsyncThunk(
   "cart/removeFromCart",
   async ({ userId, productId }, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/cart/remove`, {
+      const res = await axios.post(`https://mern-backend-ev9c.onrender.com/api/cart/remove`, {
         userId,
         productId,
       });
@@ -63,7 +63,7 @@ export const updateCartQty = createAsyncThunk(
   "cart/updateCartQty",
   async ({ userId, productId, quantity }, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/cart/update`, {
+      const res = await axios.post(`https://mern-backend-ev9c.onrender.com/api/cart/update`, {
         userId,
         productId,
         quantity,
@@ -82,7 +82,7 @@ export const clearCart = createAsyncThunk(
   "cart/clearCart",
   async (userId, { rejectWithValue }) => {
     try {
-      const res = await axios.post(`http://localhost:3000/api/cart/clear`, { userId });
+      const res = await axios.post(`https://mern-backend-ev9c.onrender.com/api/cart/clear`, { userId });
       localStorage.removeItem("cartItems"); // remove from localStorage
       return [];
     } catch (err) {

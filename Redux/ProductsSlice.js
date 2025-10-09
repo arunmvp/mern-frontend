@@ -12,7 +12,7 @@ export const allproducts = createAsyncThunk(
   "products/allproducts",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get("http://localhost:3000/api/products");
+      const res = await axios.get("https://mern-backend-ev9c.onrender.com/api/products");
       return res.data;  // correct: return fetched data
     } catch (err) {
       return rejectWithValue(err.response?.data || err.message);
