@@ -92,14 +92,14 @@ export default function ProductPopup() {
 
     try {
       if (!favourite) {
-        await axios.post("http://localhost:3000/api/auth/addfavourite", {
+        await axios.post("https://mern-backend-ev9c.onrender.com/api/auth/addfavourite", {
           userId: user.id,
           productId: selectedProduct._id,
         });
         setFavourite(true);
         setFavMessage("Added to favourites");
       } else {
-        await axios.post("http://localhost:3000/api/auth/removefavourite", { 
+        await axios.post("https://mern-backend-ev9c.onrender.com/api/auth/removefavourite", { 
           userId: user.id,
           productId: selectedProduct._id,
         });
