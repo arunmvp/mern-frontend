@@ -40,6 +40,7 @@ export function AuthProvider({ children }) {
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    localStorage.removeItem("cartItems")
 
     // console.log("User logged out");
     window.location.reload();

@@ -1,48 +1,130 @@
-// Footer.jsx
-import React from "react";
-import { FaFacebookF, FaTwitter } from "react-icons/fa";
+import React, { useRef, useState } from "react";
+import emailjs from "emailjs-com";
+import {
+  FaFacebookF,
+  FaPinterestP,
+  FaInstagram,
+  FaTwitter,
+  FaDribbble,
+  FaShippingFast,
+  FaHeadset,
+  FaUndoAlt,
+  FaLock,
+} from "react-icons/fa"; // ✅ Added feature icons here
 import "./Footer.css";
-import logo from '../../assets/logo/logo.png'
 
-export default function Footer() {
+const Footer = () => {
+  const form = useRef();
+  const [status, setStatus] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_jie76dg",   // replace with EmailJS service ID
+        "template_qmcr86s",  // replace with EmailJS template ID
+        form.current,
+        "DmrHis-fpWPHvsWr_"    // replace with EmailJS public key
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setStatus("Subscription successful!");
+          e.target.reset();
+          setTimeout(() => setStatus(""), 3000);
+        },
+        (error) => {
+          console.log(error.text);
+          setStatus("Something went wrong. Try again.");
+        }
+      );
+  };
+
   return (
     <footer className="footer">
-      <div className="footer-container">
-        {/* About */}
-        <div className="footer-section">
-          <h3>
-            <span className="footer-logo"><img style={{border:"1px solid white", borderRadius:"12px", padding:"8px 12px"}} src={logo} alt="" />E-Comm</span>
-          </h3>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever. Since the 1500s, when an unknown printer.
-          </p>
+      {/* ============ TOP FEATURES SECTION ============ */}
+      <div className="footer-top">
+        <div className="feature">
+          <FaShippingFast className="feature-icon" />
+          <h4>FREE SHIPPING</h4>
+          <p>Free shipping on all US orders or orders above $99</p>
+        </div>
+        <div className="feature">
+          <FaHeadset className="feature-icon" />
+          <h4>ONLINE SUPPORT 24/7</h4>
+          <p>We’re here to help anytime, anywhere</p>
+        </div>
+        <div className="feature">
+          <FaUndoAlt className="feature-icon" />
+          <h4>7 DAYS RETURN</h4>
+          <p>Easy returns within 7 days of purchase</p>
+        </div>
+        <div className="feature">
+          <FaLock className="feature-icon" />
+          <h4>PAYMENT SECURE</h4>
+          <p>100% secure payment processing</p>
+        </div>
+      </div>
+
+      {/* ============ MAIN FOOTER SECTION ============ */}
+      <div className="footer-main">
+        {/* Support Links */}
+        <div className="footer-column">
+          <h3>SUPPORT</h3>
+          <ul>
+            <li>Contact</li>
+            <li>Store locator</li>
+            <li>Account</li>
+            <li>FAQs</li>
+          </ul>
         </div>
 
-        {/* Social */}
-        <div className="footer-section">
-          <h3>Follow Us</h3>
+        {/* Newsletter Subscription */}
+        <div className="footer-column center">
+          <h3>JOIN OUR COMMUNITY</h3>
           <p>
-            Since the 1500s, when an unknown printer took a galley of type and
-            scrambled.
+            Subscribe to receive updates, access to exclusive deals, and more
           </p>
+
+          <form ref={form} onSubmit={sendEmail} className="subscribe-form">
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit">SUBSCRIBE</button>
+          </form>
+
+          {status && <p className="status-msg">{status}</p>}
+
           <div className="social-icons">
             <FaFacebookF />
+            <FaPinterestP />
+            <FaInstagram />
             <FaTwitter />
+            <FaDribbble />
           </div>
         </div>
 
-        {/* Contact */}
-        <div className="footer-section">
-          <h3>Contact Us</h3>
-          <p>
-            E-Comm, 4578 Marmora Road,
-            <br />
-            Glasgow D04 89GR
-          </p>
+        {/* About Links */}
+        <div className="footer-column">
+          <h3>ABOUT</h3>
+          <ul>
+            <li>Our story</li>
+            <li>Our mission</li>
+            <li>Jobs</li>
+            <li>Blog</li>
+          </ul>
         </div>
+      </div>
+
+      <div className="footer-bottom">
+        <p>© 2025 E-Comm</p>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

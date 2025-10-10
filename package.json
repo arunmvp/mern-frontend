@@ -11,14 +11,16 @@
     "start": "npm run dev"
   },
   "engines": {
-  "node": "20"
-},
+    "node": "20"
+  },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.2",
     "@reduxjs/toolkit": "^2.9.0",
     "axios": "^1.12.2",
+    "emailjs-com": "^3.2.0",
+    "framer-motion": "^12.23.22",
     "nodemon": "^3.1.10",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
