@@ -5,15 +5,19 @@ import { SetGridContext } from "../Contexts/GridContext";
 import { FilterContext } from "../Contexts/FilterContex";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const ProductsGrid = () => {
   const { grid } = useContext(SetGridContext);
-  const { filter, setCountItems, brand, priceRange } = useContext(FilterContext);
+  const { filter, setCountItems, brand, priceRange } =
+    useContext(FilterContext);
   const products = useSelector((state) => state.products.products);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const productsPerPage = 12;
+
+ 
 
   // 🔹 Sorting
   let sortedProducts = [...products];
@@ -56,7 +60,14 @@ const ProductsGrid = () => {
 
   useEffect(() => {
     setCountItems(finalProducts.length);
-  }, [filter, brand, priceRange, products, finalProducts.length, setCountItems]);
+  }, [
+    filter,
+    brand,
+    priceRange,
+    products,
+    finalProducts.length,
+    setCountItems,
+  ]);
 
   // 🔹 Handle page change with animation
   const handlePageChange = (page) => {
@@ -72,8 +83,8 @@ const ProductsGrid = () => {
   return (
     <div className="products-container">
       {isLoading ? (
-        <div className="loading-spinner">
-          <div className="spinner"></div>
+        <div className="loading-spinnerr">
+          <div className="spinnerr"></div>
           <p>Loading products...</p>
         </div>
       ) : (
@@ -87,11 +98,7 @@ const ProductsGrid = () => {
             className={`products-grid ${!grid ? "row-layout" : ""}`}
           >
             {paginatedProducts.map((product) => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                grid={grid}
-              />
+              <ProductCard key={product._id} product={product} grid={grid} />
             ))}
           </motion.div>
         </AnimatePresence>
@@ -109,6 +116,8 @@ const ProductsGrid = () => {
           </button>
         ))}
       </div>
+
+      <div></div>
     </div>
   );
 };

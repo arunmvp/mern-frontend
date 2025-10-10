@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { FaUserCircle, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -12,12 +13,10 @@ import AuthPopup from "../RegisterLogin/AuthUser";
 
 export default function Navbar() {
   const products = useSelector((state) => state.products.products);
-  const { OpenPopup } = useContext(ProductContext);
-  const { isAuthenticated, user, logout } = useContext(AuthContext);
   const cartItems = useSelector((state) => state.cart.cartItems) || [];
 
-  // console.log(user);
-  
+  const { OpenPopup } = useContext(ProductContext);
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
 
   const [cartOpen, setCartOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
@@ -25,32 +24,33 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [authPopupOpen, setAuthPopupOpen] = useState(false);
-  const [authMode, setAuthMode] = useState("login"); // login or register
+  const [authMode, setAuthMode] = useState("login");
   const [logoutConfirm, setLogoutConfirm] = useState(false);
 
-  const filteredProducts = products
-    .filter((p) => p.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  // Filter top 5 search results
+  const filteredProducts = (products || [])
+    .filter((p) => p.title?.toLowerCase().includes(searchTerm.toLowerCase()))
     .slice(0, 5);
 
-  const handleLogout = () => {
-    setLogoutConfirm(true);
-  };
+  // Logout handling
+  const handleLogout = () => setLogoutConfirm(true);
 
   const confirmLogout = () => {
     logout();
     setLogoutConfirm(false);
+    setUserOpen(false);
   };
 
   return (
     <>
-      {/* Auth Popup */}
+      {/* ================= AUTH POPUP ================= */}
       <AuthPopup
         isOpen={authPopupOpen}
         onClose={() => setAuthPopupOpen(false)}
         defaultMode={authMode}
       />
 
-      {/* Logout Confirmation */}
+      {/* ================= LOGOUT CONFIRMATION ================= */}
       {logoutConfirm && (
         <div className="auth-backdrop">
           <div className="auth-popup">
@@ -70,6 +70,7 @@ export default function Navbar() {
         </div>
       )}
 
+      {/* ================= NAVBAR ================= */}
       <nav className="navbar">
         {/* Logo */}
         <div className="nav-logo-container">
@@ -77,7 +78,7 @@ export default function Navbar() {
           <h1 className="nav-logo">E-Comm</h1>
         </div>
 
-        {/* Desktop Search */}
+        {/* ================= Desktop Search ================= */}
         <div className="nav-search desktop-only">
           <input
             type="text"
@@ -87,30 +88,41 @@ export default function Navbar() {
           />
           <label>Search Products...</label>
 
-          {searchTerm && (
-            <div className="search-dropdown">
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((item) => (
-                  <div
-                    key={item.id}
-                    className="search-item"
-                    onClick={() => OpenPopup(item)}
-                  >
-                    <img src={item.image} alt={item.title} />
-                    <div className="info">
-                      <p className="title">{item.title}</p>
-                      <p className="price">${item.price}</p>
+          <AnimatePresence>
+            {searchTerm && (
+              <motion.div
+                className="search-dropdown"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+              >
+                {filteredProducts.length > 0 ? (
+                  filteredProducts.map((item) => (
+                    <div
+                      key={item.id}
+                      className="search-item"
+                      onClick={() => {
+                        OpenPopup(item);
+                        setSearchTerm("");
+                      }}
+                    >
+                      <img src={item.image} alt={item.title} />
+                      <div className="info">
+                        <p className="title">{item.title}</p>
+                        <p className="price">${item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))
-              ) : (
-                <p className="no-results">No products found</p>
-              )}
-            </div>
-          )}
+                  ))
+                ) : (
+                  <p className="no-results">No products found</p>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* Links */}
+        {/* ================= Links ================= */}
         <ul className={`nav-links ${menuOpen ? "open" : ""}`}>
           <li>HOME</li>
           <li>BAG</li>
@@ -119,7 +131,7 @@ export default function Navbar() {
           <li>CONTACT</li>
         </ul>
 
-        {/* Actions */}
+        {/* ================= Actions ================= */}
         <div className="nav-actions">
           {/* Search Icon (mobile) */}
           <div
@@ -132,38 +144,49 @@ export default function Navbar() {
           {/* User */}
           <div className="nav-user" onClick={() => setUserOpen(!userOpen)}>
             <FaUserCircle size={24} />
-            {userOpen && (
-              <div className="user-dropdown">
-                {isAuthenticated ? (
-                  <>
-                    <h3>Welcome, {user.username || "User"}</h3>
-                    <div className="logout" onClick={handleLogout}>
-                      Logout
-                      <IoLogOutOutline size={22} />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <p
-                      onClick={() => {
-                        setAuthMode("login");
-                        setAuthPopupOpen(true);
-                      }}
-                    >
-                      Login
-                    </p>
-                    <p
-                      onClick={() => {
-                        setAuthMode("register");
-                        setAuthPopupOpen(true);
-                      }}
-                    >
-                      Register
-                    </p>
-                  </>
-                )}
-              </div>
-            )}
+
+            <AnimatePresence>
+              {userOpen && (
+                <motion.div
+                  className="user-dropdown"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  {isAuthenticated ? (
+                    <>
+                      <h3>Welcome, {user.username || "User"}</h3>
+                      <div className="logout" onClick={handleLogout}>
+                        Logout
+                        <IoLogOutOutline size={22} />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p
+                        onClick={() => {
+                          setAuthMode("login");
+                          setAuthPopupOpen(true);
+                          setUserOpen(false);
+                        }}
+                      >
+                        Login
+                      </p>
+                      <p
+                        onClick={() => {
+                          setAuthMode("register");
+                          setAuthPopupOpen(true);
+                          setUserOpen(false);
+                        }}
+                      >
+                        Register
+                      </p>
+                    </>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Cart */}
@@ -182,7 +205,7 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Fullscreen Search (mobile) */}
+      {/* ================= Mobile Search ================= */}
       {searchOpen && (
         <div className="search-overlay">
           <div className="search-box">
@@ -198,11 +221,41 @@ export default function Navbar() {
               onClick={() => setSearchOpen(false)}
             />
           </div>
+
+          {searchTerm && (
+            <div className="search-dropdown mobile-results">
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((item) => (
+                  <div
+                    key={item.id}
+                    className="search-item"
+                    onClick={() => {
+                      OpenPopup(item);
+                      setSearchTerm("");
+                      setSearchOpen(false);
+                    }}
+                  >
+                    <img src={item.image} alt={item.title} />
+                    <div className="info">
+                      <p className="title">{item.title}</p>
+                      <p className="price">${item.price}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="no-results">No products found</p>
+              )}
+            </div>
+          )}
         </div>
       )}
 
-      {/* Cart Drawer */}
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} userId={user?._id || user?.id} />
+      {/* ================= Cart Drawer ================= */}
+      <CartDrawer
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+        userId={user?._id || user?.id}
+      />
     </>
   );
 }

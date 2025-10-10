@@ -49,7 +49,7 @@
 }
 
 /* 🔹 Loading Animation */
-.loading-spinner {
+.loading-spinnerr {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +57,7 @@
   height: 300px;
 }
 
-.spinner {
+.spinnerr {
   width: 50px;
   height: 50px;
   border: 5px solid #eee;
