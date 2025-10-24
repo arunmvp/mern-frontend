@@ -108,7 +108,7 @@ export default function CartDrawer({ open, onClose , userId}) {
                     </div>
 
                     <p className="subtotal">
-                      Subtotal: ₹{(item.price * item.quantity).toFixed(2)}
+                      Subtotal: ${(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
 
@@ -128,7 +128,7 @@ export default function CartDrawer({ open, onClose , userId}) {
           <div className="cart-footer">
             <div className="cart-total">
               <span>Total:</span>
-              <strong>₹{totalPrice.toFixed(2)}</strong>
+              <strong>${totalPrice.toFixed(2)}</strong>
             </div>
             <button className="checkout-btn">Checkout</button>
             <button className="clear-cart-btn" onClick={handleClearCart}>
